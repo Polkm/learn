@@ -1,5 +1,7 @@
-## Start using Learn
-Learn can be installed as a submodule for your git project by useing the command:
+Learn's api is something like a combination between Torch and Scikit Learn.
+
+### Start using Learn
+Learn can be installed as a submodule for your git project by using the command:
 ```
 git submodule add https://github.com/Polkm/learn.git learn
 ```
