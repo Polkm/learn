@@ -23,11 +23,11 @@ local train_labels = {{0}, {1}, {1}, {0}}
 local n_input = train_features[1].size[1]
 local n_output = train_labels[1].size[1]
 
-local model = learn.nnet({modules = {
-  learn.module.linear({n_input = n_input, n_output = n_input * 3}),
-  learn.module.sigmoid({}),
-  learn.module.linear({n_input = n_input * 3, n_output = n_output}),
-  learn.module.sigmoid({}),
+local model = learn.model.nnet({modules = {
+  learn.layer.linear({n_input = n_input, n_output = n_input * 3}),
+  learn.transfer.sigmoid({}),
+  learn.layer.linear({n_input = n_input * 3, n_output = n_output}),
+  learn.transfer.sigmoid({}),
 }})
 ```
 
