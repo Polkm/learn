@@ -30,15 +30,17 @@ local model = learn.model.nnet({modules = {
   learn.transfer.sigmoid({}),
 }})
 ```
+By default nnet will use the MSE criterion, appropriate for regression tasks.
 
 ### Train your model on your data
 ```lua
-local error = model.fit(train_features, train_labels, 1000)
+local epochs = 1000
+local error = model.fit(train_features, train_labels, epochs)
 ```
 
 ### Make predictions using your newly trained model
 ```lua
 for _, prediction in pairs(model.predict(train_features)) do
-  print(prediction[1])
+  print(table.concat(prediction, ", "))
 end
 ```
