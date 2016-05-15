@@ -14,31 +14,19 @@ require("learn/learn")
 ### Set up your training data
 ```lua
 -- XOR training data
-local train_features = {
-  learn.tensor({data = {0, 0}}),
-  learn.tensor({data = {0, 1}}),
-  learn.tensor({data = {1, 0}}),
-  learn.tensor({data = {1, 1}}),
-}
-local train_labels = {
-  learn.tensor({data = {0}}),
-  learn.tensor({data = {1}}),
-  learn.tensor({data = {1}}),
-  learn.tensor({data = {0}}),
-}
+local train_features = {{0, 0}, {0, 1}, {1, 0}, {1, 1}}
+local train_labels = {{0}, {1}, {1}, {0}}
 ```
 
 ### Set up your model
 ```lua
-local n_input = #train_features[1].data
-local n_output = #train_labels[1].data
+local n_input = train_features[1].size[1]
+local n_output = train_labels[1].size[1]
 
-local model = learn.nnet({criterion = learn.criterion.mse({}), modules = {
-  learn.module.linear({n_input = n_input, n_output = n_input * 5.0}),
+local model = learn.nnet({modules = {
+  learn.module.linear({n_input = n_input, n_output = n_input * 3}),
   learn.module.sigmoid({}),
-  learn.module.linear({n_input = n_input * 5.0, n_output = n_input * 10.0}),
-  learn.module.sigmoid({}),
-  learn.module.linear({n_input = n_input * 10.0, n_output = n_output}),
+  learn.module.linear({n_input = n_input * 3, n_output = n_output}),
   learn.module.sigmoid({}),
 }})
 ```
@@ -50,8 +38,7 @@ model.fit(train_features, train_labels, 1000)
 
 ### Make predictions using your newly trained model
 ```lua
-local predictions = model.predict(train_features)
-for _, p in pairs(predictions) do
-  print(p.data[1])
+for _, prediction in pairs(model.predict(train_features)) do
+  print(prediction[1])
 end
 ```
