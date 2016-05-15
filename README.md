@@ -1,4 +1,4 @@
-Learn's api is something like a combination between Torch and Scikit Learn.
+Learn's api is something like a combination between [Torch](http://torch.ch/) and [Scikit Learn](http://scikit-learn.org/stable/). The purpose of Learn is to provide a flexible and portable neural network implementation, if you are looking for a high performance library I would suggest looking at [Torch](http://torch.ch/) instead.
 
 ### Start using Learn
 Learn can be installed as a submodule for your git project by using the command:
@@ -31,7 +31,7 @@ local model = learn.nnet({modules = {
 }})
 ```
 
-### Train your model on your training data
+### Train your model on your data
 ```lua
 model.fit(train_features, train_labels, 1000)
 ```
