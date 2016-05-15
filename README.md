@@ -33,7 +33,7 @@ local model = learn.model.nnet({modules = {
 
 ### Train your model on your data
 ```lua
-model.fit(train_features, train_labels, 1000)
+local error = model.fit(train_features, train_labels, 1000)
 ```
 
 ### Make predictions using your newly trained model
