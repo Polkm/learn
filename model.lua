@@ -17,14 +17,16 @@ function learn.model.nnet(p)
     end
   end
 
-  function p.update(input)
+  function p.update(input, learning_rate)
     for i, mod in ipairs(p.modules) do
-      input = mod.update(input)
+      input = mod.update(input, learning_rate)
     end
   end
 
-  function p.fit(features, labels, epochs, verbose)
+  function p.fit(features, labels, epochs, learning_rate, verbose)
     local final_error = 1
+
+    p.feature_max, p.label_max = learn.normalize(features), learn.normalize(labels)
 
     for e = 1, epochs do
       local error_sum = 0
@@ -38,7 +40,7 @@ function learn.model.nnet(p)
         error_sum = error_sum + p.criterion.forward(output, target)
 
         p.backward(input, p.criterion.backward(output, target))
-        p.update(input)
+        p.update(input, learning_rate)
       end
 
       final_error = error_sum / #features
@@ -57,6 +59,8 @@ function learn.model.nnet(p)
     for i, feature_vector in ipairs(features) do
       predictions[i] = p.forward(learn.tensor({data = feature_vector})).data
     end
+
+    learn.unormalize(predictions, p.label_max)
 
     return predictions
   end

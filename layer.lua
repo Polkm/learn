@@ -11,19 +11,19 @@ function learn.layer.linear(p)
   p.gradients = p.gradients or learn.tensor({size = {p.n_output, p.n_input}})
 
   function p.forward(input)
-    p.output = p.weights.dot(input, p.output)
+    -- print(table.concat(p.weights.data, ", "))
+    p.output = p.weights.dot(input)
+    -- print(table.concat(p.output.data, ", "))
     return p.output
   end
 
   function p.backward(input, gradients)
     p.delta = gradients.copy().mul(input)
-
     return input, p.weights.transpose().dot(p.delta)
   end
 
-  function p.update(input)
-    p.weights.sub(p.delta.dot(input.transpose()))
-
+  function p.update(input, learning_rate)
+    p.weights.sub(p.delta.dot(input.transpose()).scale(learning_rate))
     return p.output
   end
 

@@ -55,9 +55,13 @@ function learn.tensor(p)
   end
 
   function p.dot(b, result)
-    result = result or learn.tensor({size = {p.size[1], b.size[2]}})
-
     assert(p.size[2] == b.size[1], "Invalid dot product tensor size " .. p.size[2] .. " " .. b.size[1])
+
+    if result then
+      result.size[1], result.size[2] = p.size[1], b.size[2]
+    else
+      result = learn.tensor({size = {p.size[1], b.size[2]}})
+    end
 
     result.map(function(v, x, y)
       local sum = 0
