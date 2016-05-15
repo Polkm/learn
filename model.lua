@@ -24,6 +24,8 @@ function learn.model.nnet(p)
   end
 
   function p.fit(features, labels, epochs, verbose)
+    local final_error = 1
+
     for e = 1, epochs do
       local error_sum = 0
 
@@ -39,10 +41,14 @@ function learn.model.nnet(p)
         p.update(input)
       end
 
+      final_error = error_sum / #features
+
       if verbose and (e % (epochs / 10)) == 0 then
-        print("Error " .. math.floor(error_sum / #features / 0.00001) * 0.00001)
+        print("Error " .. math.floor(final_error / 0.00001) * 0.00001)
       end
     end
+
+    return final_error
   end
 
   function p.predict(features)
