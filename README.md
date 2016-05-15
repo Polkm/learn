@@ -1,4 +1,4 @@
-Learn's api is something like a combination between [Torch](http://torch.ch/) and [Scikit Learn](http://scikit-learn.org/stable/). The purpose of Learn is to provide a flexible and portable neural network implementation, if you are looking for a high performance library I would suggest looking at [Torch](http://torch.ch/) instead.
+Learn's api is something like a combination between [Torch](http://torch.ch/) and [Scikit Learn](http://scikit-learn.org/stable/). The purpose of Learn is to provide a flexible and portable neural network implementation that only depends on Lua. Learn is *not* multithreaded and does *not* use hardware acceleration, if you are looking for a high performance library I would suggest looking at [Torch](http://torch.ch/) instead.
 
 ### Start using Learn
 Learn can be installed as a submodule for your git project by using the command:
