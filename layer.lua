@@ -1,5 +1,5 @@
 -- Module for linear transformations using a weight tensor
-function learn.module.linear(p)
+function learn.layer.linear(p)
   p.n_input = p.n_input or 1
   p.n_output = p.n_output or 1
 
@@ -15,17 +15,16 @@ function learn.module.linear(p)
     return p.output
   end
 
-  function p.backward(pass_back, pass_back_error, pass_output)
-    p.delta = pass_back_error.copy().mul(pass_back)
+  function p.backward(input, gradients)
+    p.delta = gradients.copy().mul(input)
 
-    pass_back_error = p.weights.transpose().dot(p.delta)
-
-    return pass_back, pass_back_error
+    return input, p.weights.transpose().dot(p.delta)
   end
 
-  function p.update()
+  function p.update(input)
+    p.weights.sub(p.delta.dot(input.transpose()))
 
-    p.weights.add(p.delta.dot(pass_output.transpose()))
+    return p.output
   end
 
   return p
