@@ -20,8 +20,8 @@ local train_labels = {{0}, {1}, {1}, {0}}
 
 ### Set up your model
 ```lua
-local n_input = train_features[1].size[1]
-local n_output = train_labels[1].size[1]
+local n_input = #train_features[1]
+local n_output = #train_labels[1]
 
 local model = learn.model.nnet({modules = {
   learn.layer.linear({n_input = n_input, n_output = n_input * 3}),
